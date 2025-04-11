@@ -1,15 +1,9 @@
-// const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  // devtool: 'cheap-module-source-map', // 生成source-map文件,方便调试
-  // output: {
-  //   filename: 'aaa.js',
-  //   path: path.resolve(__dirname, '../dist'),
-  //   clean: true
-  // },
+  devtool: 'cheap-module-source-map', // 生成source-map文件,方便调试
   devServer: {
     open: true,
     port: 9527,
