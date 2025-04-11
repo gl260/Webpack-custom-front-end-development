@@ -5,6 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+/**
+ * "dev": "cross-env NODE_ENV=development webpack server --mode development --stats minimal",
+ * "build": "cross-env NODE_ENV=production webpack --mode production",
+ */
+
 module.exports = {
   entry: './src/main.js',
   output: {
