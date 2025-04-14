@@ -26,6 +26,8 @@ module.exports = merge(baseConfig, {
   ],
   optimization: {
     minimizer: [
+      // 加了这个图片压缩后,js代码没有帮我压缩,为什么?
+      // Webpack 的 `optimization.minimizer` 允许用户自定义压缩工具，但如果用户手动配置了这个数组，Webpack 就不会再使用默认的压缩插件（如 `TerserWebpackPlugin`）
       new ImageMinimizerPlugin({
         minimizer: {
           implementation: ImageMinimizerPlugin.sharpMinify, // 使用 sharp
