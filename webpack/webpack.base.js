@@ -14,7 +14,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         type: 'asset',
-        parser: { dataUrlCondition: { maxSize: 60 * 1024 } },
+        parser: { dataUrlCondition: { maxSize: 8 * 1024 } },
         generator: { filename: 'img/[name]_[hash:8][ext]' }
       },
       {

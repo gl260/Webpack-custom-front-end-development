@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -22,5 +23,24 @@ module.exports = merge(baseConfig, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css' // 独立 CSS 文件
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.sharpMinify, // 使用 sharp
+          options: {
+            encodeOptions: {
+              // 压缩配置（按格式细分）
+              jpeg: { quality: 70, mozjpeg: true }, // JPEG 质量 70%，启用 MozJPEG 优化
+              png: { quality: 70, compressionLevel: 6 }, // PNG 质量 70%，压缩级别 6
+              webp: { lossless: false, quality: 75 }, // WebP 质量 75%
+              avif: { quality: 60 }, // AVIF 质量 60%
+              gif: {} // GIF 使用默认压缩 不支持 GIF 压缩，需配合其他工具
+            }
+          }
+        }
+      })
+    ]
+  }
 });
